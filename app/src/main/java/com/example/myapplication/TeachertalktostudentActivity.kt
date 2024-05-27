@@ -110,6 +110,7 @@ class TeachertalktostudentActivity : ComponentActivity() {
         }
     }
 
+
     @Composable
     fun ParentMessageSection() {
         Card(
