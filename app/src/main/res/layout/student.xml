@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:id="@+id/main"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   tools:context=".MainActivity">
+
+
+   <TextView
+       android:id="@+id/student"
+       android:layout_width="247dp"
+       android:layout_height="82dp"
+       android:text="學生專區"
+       android:textSize="60sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.774"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.08" />
+
+   <Button
+       android:id="@+id/studenttask"
+       android:layout_width="192dp"
+       android:layout_height="208dp"
+       android:layout_marginTop="55dp"
+       android:scaleType="centerCrop"
+       android:text="任務"
+       android:textSize="48sp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.945"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/student" />
+  
+   <Button
+       android:id="@+id/studentchat"
+       android:layout_width="192dp"
+       android:layout_height="208dp"
+       android:layout_marginEnd="12dp"
+       android:scaleType="centerCrop"
+       android:text="聊天"
+       android:textSize="48sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/studenttask" />
+
+   <ImageButton
+       android:id="@+id/studentform"
+       android:layout_width="90dp"
+       android:layout_height="82dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toTopOf="@+id/studentpicturehw"
+       app:layout_constraintEnd_toStartOf="@+id/student"
+       app:layout_constraintHorizontal_bias="1.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:srcCompat="@drawable/form" />
+
+   <ImageButton
+       android:id="@+id/studentpicturehw"
+       android:layout_width="181dp"
+       android:layout_height="209dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toTopOf="@+id/studentchat"
+       app:layout_constraintEnd_toStartOf="@+id/studenttask"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/student"
+       app:srcCompat="@drawable/homework" />
+
+   <ImageButton
+       android:id="@+id/studentpicturetalk"
+       android:layout_width="181dp"
+       android:layout_height="209dp"
+       android:layout_marginStart="16dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toStartOf="@+id/studentchat"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/studentpicturehw"
+       app:srcCompat="@drawable/speak" />
+  
+</androidx.constraintlayout.widget.ConstraintLayout>

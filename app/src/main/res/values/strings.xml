@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">please</string>
+    <string name="Register">registerActivity</string>
+    <string name="Task">TaskActivity</string>
+    <string name="parent">ParentActivity</string>
+    <string name="identity">identitychoiceActivity</string>
+    <string name="teacher">TeacherActivity</string>
+    <string name="student">StudentActivity</string>
+    <string name="HW">HomeworkActivity</string>
+    <string name="chat">ChatActivity</string>
+    <string name="Teachertalktostudent">TeachertalktostudentActivity</string>
+    <string name="Teachertalktoparent">TeachertalktoparentActivity</string>
+    <string name="Parenttalktoteacher">ParenttalktoteacherActivity</string>
+    <string name="Parenttalktostudent">ParenttalktostudentActivity</string>
+    <string name="title_activity_parenttalktoteacher">Parenttalktoteacher</string>
+    <string name="title_activity_parenttalktostudent">Parenttalktostudent</string>
+    <string name="title_activity_parent">ParentActivity</string>
+    <string name="title_activity_identitychoice">IdentitychoiceActivity</string>
+    <string name="title_activity_person">Person</string>
+    <string name="title_activity_teachertalktostudent">TeachertalktostudentActivity</string>
+    <string name="title_activity_teachertalkto_parents">TeachertalktoParentsActivity</string>
+    <string name="title_activity_teacher">TeacherActivity</string>
+    <string name="title_activity_task">TaskActivity</string>
+    <string name="title_activity_student">StudentActivity</string>
+    <string name="title_activity_idenritychoice">idenritychoiceActivity</string>
+    <string name="title_activity_homework">HomeworkActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_teachertoparent">TeachertoparentActivity</string>
+    <string name="title_activity_teachertostudent">TeachertostudentActivity</string>
+</resources>

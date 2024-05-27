@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:id="@+id/main"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   tools:context=".MainActivity">
+
+   <TextView
+       android:id="@+id/chat"
+       android:layout_width="247dp"
+       android:layout_height="82dp"
+       android:text="聊天基地"
+       android:textSize="60sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.774"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.08" />
+
+   <Button
+       android:id="@+id/chatteacher"
+       android:layout_width="192dp"
+       android:layout_height="208dp"
+       android:layout_marginTop="12dp"
+       android:scaleType="centerCrop"
+
+       android:text="老師"
+       android:textSize="48sp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.945"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/chat" />
+
+   <Button
+       android:id="@+id/chatparent"
+       android:layout_width="192dp"
+       android:layout_height="208dp"
+       android:layout_marginEnd="12dp"
+       android:scaleType="centerCrop"
+       android:text="家人"
+       android:textSize="48sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/chatteacher" />
+
+   <ImageButton
+       android:id="@+id/chatform"
+       android:layout_width="90dp"
+       android:layout_height="82dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toTopOf="@+id/chatpicture"
+       app:layout_constraintEnd_toStartOf="@+id/chat"
+       app:layout_constraintHorizontal_bias="1.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.812"
+       app:srcCompat="@drawable/form" />
+
+   <ImageButton
+       android:id="@+id/chatpicture"
+       android:layout_width="181dp"
+       android:layout_height="209dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toTopOf="@+id/chatparent"
+       app:layout_constraintEnd_toStartOf="@+id/chatteacher"
+       app:layout_constraintHorizontal_bias="0.807"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/chat"
+       app:layout_constraintVertical_bias="0.128"
+       app:srcCompat="@drawable/teacher" />
+
+   <ImageButton
+       android:id="@+id/chatpicturetwo"
+       android:layout_width="181dp"
+       android:layout_height="209dp"
+       android:layout_marginStart="16dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toStartOf="@+id/chatparent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/chatpicture"
+       app:srcCompat="@drawable/parents" />
+
+   <ImageButton
+       android:id="@+id/chatmic"
+       android:layout_width="58dp"
+       android:layout_height="62dp"
+       android:background="#00000000"
+       android:scaleType="fitCenter"
+       android:translationZ="10dp"
+       app:layout_constraintBottom_toTopOf="@+id/chatpicturetwo"
+       app:layout_constraintEnd_toStartOf="@+id/chatkeyboard"
+       app:layout_constraintHorizontal_bias="0.25"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/chatpicture"
+       app:layout_constraintVertical_bias="0.3"
+       app:srcCompat="@drawable/microphone" />
+
+   <ImageButton
+       android:id="@+id/chatvolumn"
+       android:layout_width="58dp"
+       android:layout_height="62dp"
+       android:background="#00000000"
+       android:scaleType="fitCenter"
+       android:translationZ="10dp"
+       app:layout_constraintBottom_toTopOf="@+id/chatpicturetwo"
+       app:layout_constraintEnd_toStartOf="@+id/chatkeyboard"
+       app:layout_constraintStart_toEndOf="@+id/chatmic"
+       app:layout_constraintTop_toBottomOf="@+id/chatpicture"
+       app:srcCompat="@drawable/volume" />
+
+   <ImageButton
+       android:id="@+id/chatkeyboard"
+       android:layout_width="58dp"
+       android:layout_height="62dp"
+       android:background="#00000000"
+       android:scaleType="fitCenter"
+       android:translationZ="10dp"
+       app:layout_constraintBottom_toTopOf="@+id/chatparent"
+       app:layout_constraintStart_toEndOf="@+id/chatvolumn"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/chatteacher"
+       app:srcCompat="@drawable/keyboard" />
+
+   <ImageButton
+       android:id="@+id/chatmictwo"
+       android:layout_width="58dp"
+       android:layout_height="62dp"
+       android:background="#00000000"
+       android:scaleType="fitCenter"
+       android:translationZ="10dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toStartOf="@+id/chatkeyboardtwo"
+       app:layout_constraintHorizontal_bias="0.245"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/chatpicturetwo"
+       app:layout_constraintVertical_bias="0.476"
+       app:srcCompat="@drawable/microphone" />
+
+   <ImageButton
+       android:id="@+id/chatvolumntwo"
+       android:layout_width="58dp"
+       android:layout_height="62dp"
+       android:background="#00000000"
+       android:scaleType="fitCenter"
+       android:translationZ="10dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toStartOf="@+id/chatkeyboardtwo"
+       app:layout_constraintHorizontal_bias="0.522"
+       app:layout_constraintStart_toEndOf="@+id/chatmictwo"
+       app:layout_constraintTop_toBottomOf="@+id/chatparent"
+       app:srcCompat="@drawable/volume" />
+
+   <ImageButton
+       android:id="@+id/chatkeyboardtwo"
+       android:layout_width="58dp"
+       android:layout_height="62dp"
+       android:layout_marginEnd="56dp"
+       android:background="#00000000"
+       android:scaleType="fitCenter"
+       android:translationZ="10dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/chatparent"
+       app:srcCompat="@drawable/keyboard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

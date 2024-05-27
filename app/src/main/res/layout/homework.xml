@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:id="@+id/main"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   tools:context=".MainActivity">
+  
+   <TextView
+       android:id="@+id/homework"
+       android:layout_width="247dp"
+       android:layout_height="82dp"
+       android:text="課堂作業"
+       android:textSize="60sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.774"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.08" />
+
+   <ImageButton
+       android:id="@+id/homeworkform"
+       android:layout_width="90dp"
+       android:layout_height="82dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toStartOf="@+id/homework"
+       app:layout_constraintHorizontal_bias="1.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.08"
+       app:srcCompat="@drawable/form" />
+
+   <EditText
+       android:id="@+id/homeworkwrite"
+       android:layout_width="217dp"
+       android:layout_height="38dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.809"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.23" />
+  
+   <EditText
+       android:id="@+id/homeworkwritethree"
+       android:layout_width="203dp"
+       android:layout_height="47dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.591"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.441" />
+
+   <EditText
+       android:id="@+id/homeworkwritetwo"
+       android:layout_width="203dp"
+       android:layout_height="47dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.591"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.359" />
+  
+   <EditText
+       android:id="@+id/homeworkwritefour"
+       android:layout_width="203dp"
+       android:layout_height="47dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.591"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.551" />
+
+   <EditText
+       android:id="@+id/homeworkwritefive"
+       android:layout_width="203dp"
+       android:layout_height="47dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.591"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.637" />
+  
+   <EditText
+       android:id="@+id/homeworkwritesix"
+       android:layout_width="203dp"
+       android:layout_height="47dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.591"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.747" />
+  
+   <EditText
+       android:id="@+id/homeworkwriteseven"
+       android:layout_width="203dp"
+       android:layout_height="47dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.591"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.833" />
+
+   <ImageButton
+       android:id="@+id/homeworkmic"
+       android:layout_width="45dp"
+       android:layout_height="59dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.161"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.436"
+       app:srcCompat="@drawable/microphone" />
+
+   <TextView
+       android:id="@+id/homeworknight"
+       android:layout_width="67dp"
+       android:layout_height="40dp"
+       android:text="晚上:"
+       android:textSize="26sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.142"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.736" />
+  
+   <ImageButton
+       android:id="@+id/homeworkmicthree"
+       android:layout_width="45dp"
+       android:layout_height="59dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.161"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.833"
+       app:srcCompat="@drawable/microphone" />
+  
+   <ImageButton
+       android:id="@+id/homeworkmictwo"
+       android:layout_width="45dp"
+       android:layout_height="59dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.161"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.63"
+       app:srcCompat="@drawable/microphone" />
+  
+   <TextView
+       android:id="@+id/homeworkmoring"
+       android:layout_width="67dp"
+       android:layout_height="40dp"
+       android:text="早上:"
+       android:textSize="26sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.142"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.356" />
+  
+   <TextView
+       android:id="@+id/homeworkafternoon"
+       android:layout_width="67dp"
+       android:layout_height="40dp"
+       android:text="下午:"
+       android:textSize="26sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.142"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.545" />
+  
+   <TextView
+       android:id="@+id/homeworkday"
+       android:layout_width="112dp"
+       android:layout_height="38dp"
+       android:text="今日日期:"
+       android:textSize="24sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.123"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.23" />
+  
+   <ImageButton
+       android:id="@+id/homeworkmember"
+       android:layout_width="80dp"
+       android:layout_height="76dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.951"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.975"
+       app:srcCompat="@drawable/member" />
+  
+   <ImageButton
+       android:id="@+id/homeworkvolumntwo"
+       android:layout_width="48dp"
+       android:layout_height="49dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.898"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.444"
+       app:srcCompat="@drawable/volume" />
+  
+   <ImageButton
+       android:id="@+id/homeworkvolumnfour"
+       android:layout_width="48dp"
+       android:layout_height="49dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.898"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.639"
+       app:srcCompat="@drawable/volume" />
+
+   <ImageButton
+       android:id="@+id/homeworkvolumnthree"
+       android:layout_width="48dp"
+       android:layout_height="49dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.898"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.552"
+       app:srcCompat="@drawable/volume" />
+  
+   <ImageButton
+       android:id="@+id/homeworkvolumnsix"
+       android:layout_width="48dp"
+       android:layout_height="49dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.898"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.835"
+       app:srcCompat="@drawable/volume" />
+  
+   <ImageButton
+       android:id="@+id/homeworkvolumnfive"
+       android:layout_width="48dp"
+       android:layout_height="49dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.898"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.746"
+       app:srcCompat="@drawable/volume" />
+  
+   <ImageButton
+       android:id="@+id/homeworkvolumn"
+       android:layout_width="48dp"
+       android:layout_height="49dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.898"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.36"
+       app:srcCompat="@drawable/volume" />
+  
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,219 @@
+{
+  "project_info": {
+    "project_number": "506488092390",
+    "project_id": "ruantiy0605",
+    "storage_bucket": "ruantiy0605.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:e6fc49a91ea6611b836d27",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:3fd22f695e9e2643836d27",
+        "android_client_info": {
+          "package_name": "com.pu.Text"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:e0fe298978149f9c836d27",
+        "android_client_info": {
+          "package_name": "tw.edu.pu.hw"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:e1ed85fe140bd632836d27",
+        "android_client_info": {
+          "package_name": "tw.edu.pu.pei_chen.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:a8be09f4784340d8836d27",
+        "android_client_info": {
+          "package_name": "tw.edu.pu.pei_chen.myapplication0524_20"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:49a9816ea308e9ee836d27",
+        "android_client_info": {
+          "package_name": "tw.edu.pu.pei_chen.myapplication20240524"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:bae72c3ed73cc53c836d27",
+        "android_client_info": {
+          "package_name": "tw.edu.pu.pei_chen.myapplicationpp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:33dd6e10cca2bc5a836d27",
+        "android_client_info": {
+          "package_name": "tw.edu.pu.s1114670.please"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:000623b6b16e2865836d27",
+        "android_client_info": {
+          "package_name": "tw.edu.pu.s1114670.reigester"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:06a65f49b2ad2d8d836d27",
+        "android_client_info": {
+          "package_name": "tw.edu.pu.s1115048.recording"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506488092390:android:50f23448ccf1e0e4836d27",
+        "android_client_info": {
+          "package_name": "tw.edu.pu.work2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ji_Ysqtd6c1uHBBLmagW4pJl6imNGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:id="@+id/main"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   tools:context=".MainActivity">
+
+   <TextView
+       android:id="@+id/mytask"
+       android:layout_width="247dp"
+       android:layout_height="82dp"
+       android:text="我的任務"
+       android:textSize="60sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.774"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.08" />
+
+   <ImageButton
+       android:id="@+id/mytaskform"
+       android:layout_width="90dp"
+       android:layout_height="82dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toStartOf="@+id/mytask"
+       app:layout_constraintHorizontal_bias="1.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.08"
+       app:srcCompat="@drawable/form" />
+  
+   <EditText
+       android:id="@+id/mytaskwritetwo"
+       android:layout_width="226dp"
+       android:layout_height="62dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.589"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.461" />
+
+   <EditText
+       android:id="@+id/mytaskwrite"
+       android:layout_width="226dp"
+       android:layout_height="62dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.589"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.33" />
+
+   <CheckBox
+       android:id="@+id/mytaskcheck"
+       android:layout_width="60dp"
+       android:layout_height="62dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.954"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.33" />
+
+   <CheckBox
+       android:id="@+id/mytaskchecktwo"
+       android:layout_width="60dp"
+       android:layout_height="62dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.954"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.461" />
+
+   <EditText
+       android:id="@+id/mytaskwritethree"
+       android:layout_width="226dp"
+       android:layout_height="62dp"
+       android:ems="10"
+       android:inputType="textEmailAddress"
+       android:textSize="50dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.589"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.588" />
+
+   <ImageButton
+       android:id="@+id/mytaskvolumnthree"
+       android:layout_width="73dp"
+       android:layout_height="65dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.082"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.591"
+       app:srcCompat="@drawable/volume" />
+
+   <ImageButton
+       android:id="@+id/mytaskvolumntwo"
+       android:layout_width="73dp"
+       android:layout_height="65dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.082"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.463"
+       app:srcCompat="@drawable/volume" />
+  
+   <CheckBox
+       android:id="@+id/mytaskcheckthree"
+       android:layout_width="60dp"
+       android:layout_height="62dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.954"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.588" />
+  
+   <ImageButton
+       android:id="@+id/mytaskvolumn"
+       android:layout_width="73dp"
+       android:layout_height="65dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.082"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.331"
+       app:srcCompat="@drawable/volume" />
+
+   <ImageButton
+       android:id="@+id/mytasklaugh"
+       android:layout_width="137dp"
+       android:layout_height="140dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.898"
+       app:srcCompat="@drawable/smile" />
+
+   <ImageButton
+       android:id="@+id/mytasksmile"
+       android:layout_width="140dp"
+       android:layout_height="143dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.498"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.903"
+       app:srcCompat="@drawable/soso" />
+
+   <ImageButton
+       android:id="@+id/mytasksad"
+       android:layout_width="139dp"
+       android:layout_height="142dp"
+       android:background="#00000000"
+       android:scaleType="centerCrop"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="1.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.898"
+       app:srcCompat="@drawable/sad" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
