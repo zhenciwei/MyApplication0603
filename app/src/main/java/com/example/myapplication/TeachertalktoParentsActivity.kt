@@ -110,6 +110,37 @@ class TeachertalktoparentActivity : ComponentActivity() {
 
     @Composable
     fun ParentMessageSection() {
+        val db = Firebase.firestore
+        val usersCollectionRef = db.collection("users")
+
+        val query = usersCollectionRef
+            .whereEqualTo("userID", "家長")
+
+        // 創建用於存儲消息的狀態
+        var parentMessages by remember { mutableStateOf<List<String>>(emptyList()) }
+        var loading by remember { mutableStateOf(true) }
+        var errorMessage by remember { mutableStateOf<String?>(null) }
+
+        LaunchedEffect(Unit) {
+            query.get()
+                .addOnSuccessListener { documents ->
+                    val messages = documents.mapNotNull {
+                        it.getString("message").also { message ->
+                            println("Fetched message: $message") // 調試信息
+                        }
+                    }
+                    parentMessages = messages
+                    loading = false
+                    println("Total messages fetched: ${messages.size}") // 調試信息
+                }
+                .addOnFailureListener { exception ->
+                    // 處理失敗的情況
+                    errorMessage = "Error getting documents: ${exception.message}"
+                    loading = false
+                    println("Error getting documents: ${exception.message}") // 調試信息
+                }
+        }
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()

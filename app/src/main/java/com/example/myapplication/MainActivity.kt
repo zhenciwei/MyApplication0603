@@ -85,6 +85,7 @@ fun MyApp() {
 fun RegisterOrLogin(onRegisterOrLoginSuccess: (Person) -> Unit) {
     var userName by remember { mutableStateOf("") }
     var userPassword by remember { mutableStateOf("") }
+    var userID by remember { mutableStateOf("") }
     var msg by remember { mutableStateOf("") }
     val db = Firebase.firestore
 
@@ -116,9 +117,16 @@ fun RegisterOrLogin(onRegisterOrLoginSuccess: (Person) -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = PasswordVisualTransformation()
         )
+        TextField(
+            value = userID,
+            onValueChange = { newText -> userID = newText },
+            label = { Text("身分") },
+            placeholder = { Text("請輸入您的身分(老師/學生/家長)") },
+            modifier = Modifier.fillMaxWidth()
+        )
         Button(
             onClick = {
-                val user = Person(userName, userName, userPassword) // 使用者名稱與帳號相同
+                val user = Person(userID,userName, userName, userPassword) // 使用者名稱與帳號相同
                 db.collection("users")
                     .document(userName)
                     .set(user)
@@ -144,8 +152,10 @@ fun RegisterOrLogin(onRegisterOrLoginSuccess: (Person) -> Unit) {
 }
 
 data class Person(
+    var userID: String = "",
     var userName: String = "",
     var userAccount: String = "",
     var userPassword: String = "",
-    var message: String = ""
+    var message: String = "",
+    var message2: String = ""
 )

@@ -24,6 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.io.IOException
@@ -113,6 +115,38 @@ class TeachertalktostudentActivity : ComponentActivity() {
 
     @Composable
     fun ParentMessageSection() {
+        val db = Firebase.firestore
+        val usersCollectionRef = db.collection("users")
+
+        val query = usersCollectionRef
+            .whereEqualTo("userID", "學生")
+
+        // 創建用於存儲消息的狀態
+        var studentMessages by remember { mutableStateOf<List<String>>(emptyList()) }
+        var loading by remember { mutableStateOf(true) }
+        var errorMessage by remember { mutableStateOf<String?>(null) }
+
+        // 獲取學生消息
+        LaunchedEffect(Unit) {
+            query.get()
+                .addOnSuccessListener { documents ->
+                    val messages = documents.mapNotNull {
+                        it.getString("message").also { message ->
+                            println("Fetched message: $message") // 調試信息
+                        }
+                    }
+                    studentMessages = messages
+                    loading = false
+                    println("Total messages fetched: ${messages.size}") // 調試信息
+                }
+                .addOnFailureListener { exception ->
+                    // 處理失敗的情況
+                    errorMessage = "Error getting documents: ${exception.message}"
+                    loading = false
+                    println("Error getting documents: ${exception.message}") // 調試信息
+                }
+        }
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -132,11 +166,27 @@ class TeachertalktostudentActivity : ComponentActivity() {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "今天好累喔",
-                    fontSize = 16.sp,
-                    color = Color.Black
-                )
+                when {
+                    loading -> {
+                        Text(text = "Loading...", fontSize = 16.sp, color = Color.Gray)
+                    }
+                    errorMessage != null -> {
+                        Text(text = errorMessage ?: "Unknown error", fontSize = 16.sp, color = Color.Red)
+                    }
+                    studentMessages.isEmpty() -> {
+                        Text(text = "No messages found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                    else -> {
+                        studentMessages.forEach { message ->
+                            Text(
+                                text = message,
+                                fontSize = 16.sp,
+                                color = Color.Black
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
+                    }
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
