@@ -27,4 +27,6 @@
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_teachertoparent">TeachertoparentActivity</string>
     <string name="title_activity_teachertostudent">TeachertostudentActivity</string>
+    <string name="title_activity_studenttalktoparents">studenttalktoparents</string>
+    <string name="title_activity_studenttalktoteacher">studenttalktoteacher</string>
 </resources>

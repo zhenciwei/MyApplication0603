@@ -30,6 +30,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,22 +49,27 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.io.IOException
 
-@Suppress("DEPRECATION")
 class ParenttalktostudentActivity : ComponentActivity() {
     private var recorder: MediaRecorder? = null
     private var isRecording by mutableStateOf(false)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 獲取傳遞的使用者資料
+        val userName = intent.getStringExtra("userName") ?: ""
+        val userAccount = intent.getStringExtra("userAccount") ?: ""
+        val userPassword = intent.getStringExtra("userPassword") ?: ""
+        val currentUser = Person(userName, userAccount, userPassword)
+
         setContent {
             ParentStudentInteractionScreen(
+                currentUser = currentUser,
                 startRecording = { startRecording() },
                 stopRecording = { stopRecording() },
                 isRecording = isRecording,
             )
         }
     }
-
     private fun startRecording() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 0)
@@ -84,7 +90,6 @@ class ParenttalktostudentActivity : ComponentActivity() {
             }
         }
     }
-
     private fun stopRecording() {
         recorder?.apply {
             stop()
@@ -93,9 +98,9 @@ class ParenttalktostudentActivity : ComponentActivity() {
         recorder = null
         isRecording = false
     }
-
     @Composable
     fun ParentStudentInteractionScreen(
+        currentUser: Person,
         startRecording: () -> Unit,
         stopRecording: () -> Unit,
         isRecording: Boolean
@@ -106,20 +111,54 @@ class ParenttalktostudentActivity : ComponentActivity() {
                 .background(Color(0xFFE0E0E0))
                 .padding(16.dp)
         ) {
-            StudentMessageSection()
+            ParentMessageSection()
             Spacer(modifier = Modifier.height(16.dp))
-            TeacherMessageSection()
+
+            TeacherMessageSection(currentUser = currentUser)
             Spacer(modifier = Modifier.height(16.dp))
             IconSection(
                 startRecording = startRecording,
                 stopRecording = stopRecording,
-                isRecording = isRecording
+                isRecording = isRecording,
+                mmIcon = R.drawable.mm,
+                homeworkIcon = R.drawable.homework,
+                peopleIcon = R.drawable.people
             )
         }
     }
-
     @Composable
-    fun StudentMessageSection() {
+    fun ParentMessageSection() {
+        val db = Firebase.firestore
+        val usersCollectionRef = db.collection("users")
+        val query = usersCollectionRef
+            .whereEqualTo("userID", "學生")
+
+        // 創建用於存儲消息的狀態
+        var studentMessages by remember { mutableStateOf<List<Pair<String, String>>>(emptyList()) }
+        var loading by remember { mutableStateOf(true) }
+        var errorMessage by remember { mutableStateOf<String?>(null) }
+
+        LaunchedEffect(Unit) {
+            query.get()
+                .addOnSuccessListener { documents ->
+                    val messages = documents.mapNotNull {
+                        val message1 = it.getString("message")
+                        val message2 = it.getString("message2")
+                        if (message1 != null && message2 != null) {
+                            Pair(message1, message2)
+                        } else {
+                            null
+                        }
+                    }
+                    studentMessages = messages
+                    loading = false
+                }
+                .addOnFailureListener { exception ->
+                    errorMessage = "Error getting documents: ${exception.message}"
+                    loading = false
+                }
+        }
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -139,18 +178,39 @@ class ParenttalktostudentActivity : ComponentActivity() {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "媽媽今天上課作業沒做完，嗚嗚嗚嗚嗚",
-                    fontSize = 16.sp,
-                    color = Color.Black
-                )
+                when {
+                    loading -> {
+                        Text(text = "Loading...", fontSize = 16.sp, color = Color.Gray)
+                    }
+                    errorMessage != null -> {
+                        Text(text = errorMessage ?: "Unknown error", fontSize = 16.sp, color = Color.Red)
+                    }
+                    studentMessages.isEmpty() -> {
+                        Text(text = "No messages found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                    else -> {
+                        studentMessages.forEach { (message1, message2) ->
+                            Text(
+                                text = "Message: $message1",
+                                fontSize = 16.sp,
+                                color = Color.Black
+                            )
+                            Text(
+                                text = "Message2: $message2",
+                                fontSize = 16.sp,
+                                color = Color.Black
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
+                    }
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.volume), // 替換為您的圖標資源ID
+                        painter = painterResource(id = R.drawable.volume),
                         contentDescription = "Play Audio",
                         modifier = Modifier.size(24.dp)
                     )
@@ -160,9 +220,7 @@ class ParenttalktostudentActivity : ComponentActivity() {
     }
 
     @Composable
-    fun TeacherMessageSection() {
-        val currentUser = Person("Teacher", "")
-
+    fun TeacherMessageSection(currentUser: Person) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -176,22 +234,25 @@ class ParenttalktostudentActivity : ComponentActivity() {
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "給小孩的話",
+                    text = "給家長的話",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                SendMessage3(currentUser)
+                // 在這裡添加老師的留言內容或文本框
+                SendMessage(currentUser)
             }
         }
     }
-
     @Composable
     fun IconSection(
         startRecording: () -> Unit,
         stopRecording: () -> Unit,
-        isRecording: Boolean
+        isRecording: Boolean,
+        mmIcon: Int,
+        homeworkIcon: Int,
+        peopleIcon: Int
     ) {
         val context = LocalContext.current
 
@@ -200,21 +261,32 @@ class ParenttalktostudentActivity : ComponentActivity() {
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val icons = listOf(
-                R.drawable.mm
-            )
-
-            // Recording button
             IconButton(onClick = { if (isRecording) stopRecording() else startRecording() }) {
                 Icon(
-                    painter = painterResource(id = icons[0]),
+                    painter = painterResource(id = mmIcon),
                     contentDescription = null,
                     modifier = Modifier.size(50.dp),
                     tint = if (isRecording) Color.Red else Color.Black
                 )
             }
-        }
 
+            IconButton(onClick = {context.startActivity(Intent(context, HomeworkActivity::class.java))}) {
+                Icon(
+                    painter = painterResource(id = homeworkIcon),
+                    contentDescription = null,
+                    modifier = Modifier.size(50.dp),
+                    tint = Color.Black
+                )
+            }
+            IconButton(onClick = {context.startActivity(Intent(context, TeachertoparentActivity::class.java))}) {
+                Icon(
+                    painter = painterResource(id = peopleIcon),
+                    contentDescription = null,
+                    modifier = Modifier.size(50.dp),
+                    tint = Color.Black
+                )
+            }
+        }
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -227,53 +299,65 @@ class ParenttalktostudentActivity : ComponentActivity() {
                     .size(50.dp)
                     .background(Color.Transparent)
                     .clickable {
-                        val intent = Intent(context, ParentActivity::class.java)
+                        val intent = Intent(context, TeacherActivity::class.java)
                         context.startActivity(intent)
                     }
             )
             Spacer(modifier = Modifier.width(16.dp))
         }
     }
-
-
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
+        // 獲取傳遞的使用者資料
+        val userName = intent.getStringExtra("userName") ?: ""
+        val userAccount = intent.getStringExtra("userAccount") ?: ""
+        val userPassword = intent.getStringExtra("userPassword") ?: ""
+        val currentUser = Person(userName, userAccount, userPassword)
         ParentStudentInteractionScreen(
+            currentUser = Person(userName, userAccount, userPassword),
             startRecording = {},
             stopRecording = {},
-            isRecording = false,
+            isRecording = false
         )
     }
 }
+// 傳訊息功能
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SendMessage3(currentUser: Person) {
+fun SendMessage(currentUser: Person) {
     var userMsg by remember { mutableStateOf("") }
+    var userMsg2 by remember { mutableStateOf("") } // Add this line
     var msg by remember { mutableStateOf("") }
     val db = Firebase.firestore
 
     Column {
         TextField(
             value = userMsg,
-            onValueChange = { newText ->
-                userMsg = newText
-            },
+            onValueChange = { newText -> userMsg = newText },
             label = { Text("新增訊息") },
             placeholder = { Text("請輸入訊息") }
         )
-
+        TextField( // Add this TextField for message2
+            value = userMsg2,
+            onValueChange = { newText -> userMsg2 = newText },
+            label = { Text("新增訊息 2") },
+            placeholder = { Text("請輸入訊息 2") }
+        )
         Button(onClick = {
-            val message = Person(currentUser.userName, userMsg)
+            val message = mapOf(
+                "message" to userMsg,
+                "message2" to userMsg2
+            )
             db.collection("users")
-                .document(currentUser.userName)
-                .collection("Messages")
-                .add(message)
-                .addOnSuccessListener { _ ->
+                .document(currentUser.userName) // 使用者名稱作為文件ID
+                .collection("Messages") // 新增訊息子集合
+                .add(message) // 添加新訊息
+                .addOnSuccessListener { documentReference ->
                     msg = "傳送成功"
                 }
                 .addOnFailureListener { e ->
-                    msg = "傳送失敗：$e"
+                    msg = "傳送失敗：" + e.toString()
                 }
         }) {
             Text("傳送")

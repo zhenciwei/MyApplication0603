@@ -49,15 +49,17 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.io.IOException
 
+
+
 @Suppress("DEPRECATION")
-class ParenttalktoteacherActivity : ComponentActivity() {
+class studenttalktoteacher : ComponentActivity() {
     private var recorder: MediaRecorder? = null
     private var isRecording by mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ParentTeacherInteractionScreen(
+            ParentStudentInteractionScreen(
                 startRecording = { startRecording() },
                 stopRecording = { stopRecording() },
                 isRecording = isRecording,
@@ -96,7 +98,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
     }
 
     @Composable
-    fun ParentTeacherInteractionScreen(
+    fun ParentStudentInteractionScreen(
         startRecording: () -> Unit,
         stopRecording: () -> Unit,
         isRecording: Boolean
@@ -121,6 +123,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
 
     @Composable
     fun StudentMessageSection() {
+
         val db = Firebase.firestore
         val usersCollectionRef = db.collection("users")
         val query = usersCollectionRef
@@ -135,7 +138,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
             query.get()
                 .addOnSuccessListener { documents ->
                     val messages = documents.mapNotNull {
-                        it.getString("message2").also { message ->
+                        it.getString("message").also { message ->
                             println("Fetched message: $message") // 調試信息
                         }
                     }
@@ -229,7 +232,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                SendMessage2(currentUser)
+                SendMessage13(currentUser)
             }
         }
     }
@@ -286,7 +289,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
-        ParentTeacherInteractionScreen(
+        ParentStudentInteractionScreen(
             startRecording = {},
             stopRecording = {},
             isRecording = false,
@@ -295,7 +298,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SendMessage2(currentUser: Person) {
+fun SendMessage13(currentUser: Person) {
     var userMsg by remember { mutableStateOf("") }
     var msg by remember { mutableStateOf("") }
     val db = Firebase.firestore
@@ -311,7 +314,7 @@ fun SendMessage2(currentUser: Person) {
         )
 
         Button(onClick = {
-            val message = Person(currentUser.userName, message = userMsg)
+            val message = Person(currentUser.userName, message2 = userMsg)
             db.collection("users")
                 .document(currentUser.userName)
                 .collection("Messages")

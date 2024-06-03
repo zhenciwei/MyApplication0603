@@ -117,7 +117,6 @@ class TeachertalktostudentActivity : ComponentActivity() {
     fun ParentMessageSection() {
         val db = Firebase.firestore
         val usersCollectionRef = db.collection("users")
-
         val query = usersCollectionRef
             .whereEqualTo("userID", "學生")
 

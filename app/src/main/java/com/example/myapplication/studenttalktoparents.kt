@@ -49,15 +49,17 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.io.IOException
 
+
+
 @Suppress("DEPRECATION")
-class ParenttalktoteacherActivity : ComponentActivity() {
+class studenttalktoparents : ComponentActivity() {
     private var recorder: MediaRecorder? = null
     private var isRecording by mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ParentTeacherInteractionScreen(
+            ParentStudentInteractionScreen(
                 startRecording = { startRecording() },
                 stopRecording = { stopRecording() },
                 isRecording = isRecording,
@@ -96,7 +98,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
     }
 
     @Composable
-    fun ParentTeacherInteractionScreen(
+    fun ParentStudentInteractionScreen(
         startRecording: () -> Unit,
         stopRecording: () -> Unit,
         isRecording: Boolean
@@ -121,13 +123,14 @@ class ParenttalktoteacherActivity : ComponentActivity() {
 
     @Composable
     fun StudentMessageSection() {
+
         val db = Firebase.firestore
         val usersCollectionRef = db.collection("users")
         val query = usersCollectionRef
-            .whereEqualTo("userID", "老師")
+            .whereEqualTo("userID", "家長")
 
         // 創建用於存儲消息的狀態
-        var teacherMessages by remember { mutableStateOf<List<String>>(emptyList()) }
+        var parentMessages by remember { mutableStateOf<List<String>>(emptyList()) }
         var loading by remember { mutableStateOf(true) }
         var errorMessage by remember { mutableStateOf<String?>(null) }
 
@@ -139,7 +142,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
                             println("Fetched message: $message") // 調試信息
                         }
                     }
-                    teacherMessages = messages
+                    parentMessages = messages
                     loading = false
                     println("Total messages fetched: ${messages.size}") // 調試信息
                 }
@@ -164,7 +167,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "老師的留言",
+                    text = "家長的留言",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
@@ -177,11 +180,11 @@ class ParenttalktoteacherActivity : ComponentActivity() {
                     errorMessage != null -> {
                         Text(text = errorMessage ?: "Unknown error", fontSize = 16.sp, color = Color.Red)
                     }
-                    teacherMessages.isEmpty() -> {
+                    parentMessages.isEmpty() -> {
                         Text(text = "No messages found", fontSize = 16.sp, color = Color.Gray)
                     }
                     else -> {
-                        teacherMessages.forEach { message ->
+                        parentMessages.forEach { message ->
                             Text(
                                 text = message,
                                 fontSize = 16.sp,
@@ -223,13 +226,13 @@ class ParenttalktoteacherActivity : ComponentActivity() {
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "給老師的話",
+                    text = "給家長的話",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                SendMessage2(currentUser)
+                SendMessage4(currentUser)
             }
         }
     }
@@ -286,7 +289,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
-        ParentTeacherInteractionScreen(
+        ParentStudentInteractionScreen(
             startRecording = {},
             stopRecording = {},
             isRecording = false,
@@ -295,7 +298,7 @@ class ParenttalktoteacherActivity : ComponentActivity() {
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SendMessage2(currentUser: Person) {
+fun SendMessage4(currentUser: Person) {
     var userMsg by remember { mutableStateOf("") }
     var msg by remember { mutableStateOf("") }
     val db = Firebase.firestore
@@ -311,11 +314,10 @@ fun SendMessage2(currentUser: Person) {
         )
 
         Button(onClick = {
-            val message = Person(currentUser.userName, message = userMsg)
+            val message = hashMapOf("message2" to userMsg)
             db.collection("users")
                 .document(currentUser.userName)
-                .collection("Messages")
-                .add(message)
+                .set(message)
                 .addOnSuccessListener { _ ->
                     msg = "傳送成功"
                 }

@@ -14,8 +14,12 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,6 +28,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.tasks.await
 
 class TaskActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,13 +44,51 @@ class TaskActivity : ComponentActivity() {
 
 @Composable
 fun TaskScreen() {
-    val task1 = remember { mutableStateOf("") }
-    val task2 = remember { mutableStateOf("") }
-    val task3 = remember { mutableStateOf("") }
-    val task1Checked = remember { mutableStateOf(false) }
-    val task2Checked = remember { mutableStateOf(false) }
-    val task3Checked = remember { mutableStateOf(false) }
+    var taskMessage1 by remember { mutableStateOf("查無資料") }
+    var taskMessage2 by remember { mutableStateOf("查無資料") }
+    var taskMessage3 by remember { mutableStateOf("查無資料") }
+
+    val checkedStates = remember { mutableStateListOf(false, false, false) }
     val context = LocalContext.current
+
+    val db = Firebase.firestore
+
+    db.collection("users")
+        .get()
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                var msg1 = ""
+                var msg2 = ""
+                var msg3 = ""
+
+                for (document in task.result!!) {
+                    val userId = document.id
+                    db.collection("users").document(userId).collection("tasks").document("dailyTasks")
+                        .get()
+                        .addOnSuccessListener { dailyTasks ->
+                            if (dailyTasks.exists()) {
+                                val morningTask = dailyTasks.get("morningTask.task") as String? ?: ""
+                                val afternoonTask = dailyTasks.get("afternoonTask.task") as String? ?: ""
+                                val nightTask = dailyTasks.get("nightTask.task") as String? ?: ""
+
+                                if (morningTask.isNotEmpty()) msg1 += "早上的作業:" + morningTask
+                                if (afternoonTask.isNotEmpty()) msg2 += "中午的作業:" + afternoonTask
+                                if (nightTask.isNotEmpty()) msg3 += "晚上的作業:" + nightTask
+                            }
+                            // Handle the msg, e.g., display it or log it
+                            taskMessage1 = msg1
+                            taskMessage2 = msg2
+                            taskMessage3 = msg3
+                        }
+                }
+            } else {
+                // Handle the error
+                taskMessage1 = "no message"
+                taskMessage2 = "no message"
+                taskMessage3 = "no message"
+            }
+        }
+
 
     Column(
         modifier = Modifier
@@ -64,24 +110,21 @@ fun TaskScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TaskItem(
-                taskText = task1.value,
-                onTextChange = { task1.value = it },
-                isChecked = task1Checked.value,
-                onCheckedChange = { task1Checked.value = it }
+                taskText = taskMessage1,
+                isChecked = checkedStates[0],
+                onCheckedChange = { checkedStates[0] = it }
             )
 
             TaskItem(
-                taskText = task2.value,
-                onTextChange = { task2.value = it },
-                isChecked = task2Checked.value,
-                onCheckedChange = { task2Checked.value = it }
+                taskText = taskMessage2,
+                isChecked = checkedStates[1],
+                onCheckedChange = { checkedStates[1] = it }
             )
 
             TaskItem(
-                taskText = task3.value,
-                onTextChange = { task3.value = it },
-                isChecked = task3Checked.value,
-                onCheckedChange = { task3Checked.value = it }
+                taskText = taskMessage3,
+                isChecked = checkedStates[2],
+                onCheckedChange = { checkedStates[2] = it }
             )
         }
 
@@ -113,7 +156,6 @@ fun TaskScreen() {
 @Composable
 fun TaskItem(
     taskText: String,
-    onTextChange: (String) -> Unit,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
@@ -124,9 +166,8 @@ fun TaskItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
-        BasicTextField(
-            value = taskText,
-            onValueChange = onTextChange,
+        Text(
+            text = taskText,
             modifier = Modifier
                 .weight(1f)
                 .height(62.dp)

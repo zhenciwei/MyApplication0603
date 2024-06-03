@@ -10,10 +10,31 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -112,12 +133,11 @@ class TeachertalktoparentActivity : ComponentActivity() {
     fun ParentMessageSection() {
         val db = Firebase.firestore
         val usersCollectionRef = db.collection("users")
-
         val query = usersCollectionRef
             .whereEqualTo("userID", "家長")
 
         // 創建用於存儲消息的狀態
-        var parentMessages by remember { mutableStateOf<List<String>>(emptyList()) }
+        var studentMessages by remember { mutableStateOf<List<Pair<String, String>>>(emptyList()) }
         var loading by remember { mutableStateOf(true) }
         var errorMessage by remember { mutableStateOf<String?>(null) }
 
@@ -125,19 +145,20 @@ class TeachertalktoparentActivity : ComponentActivity() {
             query.get()
                 .addOnSuccessListener { documents ->
                     val messages = documents.mapNotNull {
-                        it.getString("message").also { message ->
-                            println("Fetched message: $message") // 調試信息
+                        val message1 = it.getString("message")
+                        val message2 = it.getString("message2")
+                        if (message1 != null && message2 != null) {
+                            Pair(message1, message2)
+                        } else {
+                            null
                         }
                     }
-                    parentMessages = messages
+                    studentMessages = messages
                     loading = false
-                    println("Total messages fetched: ${messages.size}") // 調試信息
                 }
                 .addOnFailureListener { exception ->
-                    // 處理失敗的情況
                     errorMessage = "Error getting documents: ${exception.message}"
                     loading = false
-                    println("Error getting documents: ${exception.message}") // 調試信息
                 }
         }
 
@@ -160,11 +181,32 @@ class TeachertalktoparentActivity : ComponentActivity() {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "老師您好，小明今天需在中午飯後吃過敏藥",
-                    fontSize = 16.sp,
-                    color = Color.Black
-                )
+                when {
+                    loading -> {
+                        Text(text = "Loading...", fontSize = 16.sp, color = Color.Gray)
+                    }
+                    errorMessage != null -> {
+                        Text(text = errorMessage ?: "Unknown error", fontSize = 16.sp, color = Color.Red)
+                    }
+                    studentMessages.isEmpty() -> {
+                        Text(text = "No messages found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                    else -> {
+                        studentMessages.forEach { (message1, message2) ->
+                            Text(
+                                text = "Message: $message1",
+                                fontSize = 16.sp,
+                                color = Color.Black
+                            )
+                            Text(
+                                text = "Message2: $message2",
+                                fontSize = 16.sp,
+                                color = Color.Black
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
+                    }
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -179,6 +221,7 @@ class TeachertalktoparentActivity : ComponentActivity() {
             }
         }
     }
+
     @Composable
     fun TeacherMessageSection(currentUser: Person) {
         Card(
@@ -292,21 +335,28 @@ class TeachertalktoparentActivity : ComponentActivity() {
 @Composable
 fun SendMessage5(currentUser: Person) {
     var userMsg by remember { mutableStateOf("") }
+    var userMsg2 by remember { mutableStateOf("") } // Add this line
     var msg by remember { mutableStateOf("") }
     val db = Firebase.firestore
 
     Column {
         TextField(
             value = userMsg,
-            onValueChange = { newText ->
-                userMsg = newText
-            },
+            onValueChange = { newText -> userMsg = newText },
             label = { Text("新增訊息") },
             placeholder = { Text("請輸入訊息") }
         )
-
+        TextField( // Add this TextField for message2
+            value = userMsg2,
+            onValueChange = { newText -> userMsg2 = newText },
+            label = { Text("新增訊息 2") },
+            placeholder = { Text("請輸入訊息 2") }
+        )
         Button(onClick = {
-            val message = Person(currentUser.userName, message = userMsg)
+            val message = mapOf(
+                "message" to userMsg,
+                "message2" to userMsg2
+            )
             db.collection("users")
                 .document(currentUser.userName) // 使用者名稱作為文件ID
                 .collection("Messages") // 新增訊息子集合
